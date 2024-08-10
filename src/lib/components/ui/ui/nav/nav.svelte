@@ -3,11 +3,12 @@
 	import { Button } from '$lib/components/ui/ui/button';
 	import { siteConfig } from '$lib/site/config';
 	import { cn } from '$lib/utils';
+	import Darkmode from '../themetoggle.svelte';
 
 	let navHidden = false;
 </script>
 
-<nav class={`nav sticky top-0 -z-[-1] border-b bg-background p-2 ${navHidden ? 'opacity-0' : ''}`}>
+<nav class={`nav top-0 -z-[-1] border-b bg-background p-2 ${navHidden ? 'opacity-0' : ''}`}>
 	<div class="mx-auto flex w-full max-w-5xl items-center justify-between">
 		<a href="/" class="nav-logo" aria-label="Home">
 			<span class="hidden font-bold sm:inline-block">
@@ -44,6 +45,7 @@
 						)}>daily</Button
 					>
 				</a>
+				<Darkmode />
 			</div>
 			<!-- {/if} -->
 		</nav>

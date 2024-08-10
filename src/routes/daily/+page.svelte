@@ -8,6 +8,7 @@
 	import { cn } from '$lib/utils.js';
 	import TimerTable from '$lib/components/ui/ui/timerTable.svelte';
 	import { formatDate } from '$lib/site/dateutils.js';
+	import { CirclePlus } from 'lucide-svelte';
 
 	const frameworks = [
 		{
@@ -68,43 +69,50 @@
 
 <div class="mx-auto flex flex-col items-center justify-center">
 	<div class="w-full max-w-3xl rounded-lg bg-secondary p-6 shadow-md">
-		<div class="font-semibold">Project Search</div>
-		<Popover.Root bind:open let:ids>
-			<Popover.Trigger asChild let:builder>
-				<Button
-					builders={[builder]}
-					variant="outline"
-					role="combobox"
-					aria-expanded={open}
-					class="w-[200px] justify-between"
-				>
-					{selectedValue}
-					<ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
-				</Button>
-			</Popover.Trigger>
-			<Popover.Content class="w-[200px] p-0">
-				<Command.Root>
-					<Command.Input placeholder="Search time codes..." />
-					<Command.Empty>No timecode found.</Command.Empty>
-					<Command.Group>
-						{#each frameworks as framework}
-							<Command.Item
-								value={framework.value}
-								onSelect={(currentValue) => {
-									value = currentValue;
-									closeAndFocusTrigger(ids.trigger);
-								}}
-							>
-								<Check
-									class={cn('mr-2 h-4 w-4', value !== framework.value && 'text-transparent')}
-								/>
-								{framework.label}
-							</Command.Item>
-						{/each}
-					</Command.Group>
-				</Command.Root>
-			</Popover.Content>
-		</Popover.Root>
+		<div class="flex items-center">
+			<span class="font-semibold">Project Search</span>
+			<Popover.Root bind:open let:ids>
+				<Popover.Trigger asChild let:builder>
+					<Button
+						builders={[builder]}
+						variant="outline"
+						role="combobox"
+						aria-expanded={open}
+						class="w-[200px] justify-between"
+					>
+						{selectedValue}
+						<ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
+					</Button>
+				</Popover.Trigger>
+				<Popover.Content class="w-[200px] p-0">
+					<Command.Root>
+						<Command.Input placeholder="Search time codes..." />
+						<Command.Empty>No timecode found.</Command.Empty>
+						<Command.Group>
+							{#each frameworks as framework}
+								<Command.Item
+									value={framework.value}
+									onSelect={(currentValue) => {
+										value = currentValue;
+										closeAndFocusTrigger(ids.trigger);
+									}}
+								>
+									<Check
+										class={cn('mr-2 h-4 w-4', value !== framework.value && 'text-transparent')}
+									/>
+									{framework.label}
+								</Command.Item>
+							{/each}
+						</Command.Group>
+					</Command.Root>
+				</Popover.Content>
+			</Popover.Root>
+			<Button variant="outline" class="gap-1">
+				<CirclePlus class="h-3.5 w-3.5" />
+				Add Project
+			</Button>
+		</div>
+
 		<TimerTable stuff={data.projects}></TimerTable>
 	</div>
 </div>

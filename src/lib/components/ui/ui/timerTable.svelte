@@ -5,7 +5,7 @@
 	import { Button } from '$lib/components/ui/ui/button/index.js';
 	import type { Project } from '$lib/types';
 	import { formatSeconds } from '$lib/site/dateutils';
-	import { Pause, Play } from 'lucide-svelte';
+	import { CirclePlus, Pause, Play } from 'lucide-svelte';
 	import { tick } from 'svelte';
 	type Props = {
 		stuff: Project[];
@@ -13,10 +13,14 @@
 	let { stuff }: Props = $props();
 
 	let isClicked = $state(false);
+	let selectedRow = $state(0);
+	let selected = stuff.map(() => false);
 
-	async function annoyMike() {
+	async function annoyMike(x: number) {
 		await tick();
+		console.log(x);
 		isClicked = !isClicked;
+		selectedRow = x;
 	}
 </script>
 
@@ -37,7 +41,7 @@
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>
-				{#each stuff as row}
+				{#each stuff as row, i}
 					<Table.Row>
 						<Table.Cell>
 							<div class="font-medium">{row.name}</div>
@@ -49,14 +53,16 @@
 							<Badge class="text-xs" variant="secondary">{row.description}</Badge>
 						</Table.Cell>
 						<Table.Cell class="hidden sm:table-cell">{formatSeconds(row.timeSpent)}</Table.Cell>
-						<Table.Cell class="text-xl accent-foreground">
-							<Button
-								variant="outline"
-								size="icon"
-								onclick={() => (isClicked = !isClicked)}
-								class={isClicked ? 'bg-green-900' : ''}><Play /></Button
-							>
-							<Button variant="ghost" size="icon"><Pause /></Button>
+						<Table.Cell class="accent-foreground">
+							<div class="flex items-center space-x-2">
+								<Button
+									variant="outline"
+									size="icon"
+									onclick={() => annoyMike(i)}
+									class={selectedRow == i ? 'ring' : ''}><Play /></Button
+								>
+								<Button variant="ghost" size="icon"><Pause /></Button>
+							</div>
 						</Table.Cell>
 					</Table.Row>
 				{/each}
