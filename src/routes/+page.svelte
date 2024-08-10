@@ -1,20 +1,18 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/ui/button/index.js';
+	import * as Card from '$lib/components/ui/ui/card/index.js';
 	import { Input } from '$lib/components/ui/ui/input/index.js';
 	import { Label } from '$lib/components/ui/ui/label/index.js';
 	import { siteConfig } from '$lib/site/config';
 	let { data } = $props();
 </script>
 
-<!-- <div class="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]"> -->
-<div class="flex items-center justify-center py-12">
-	<div class="mx-auto grid w-[350px] gap-6">
-		<div class="grid gap-2 text-center">
-			<h1 class="text-3xl font-bold">Login</h1>
-			<p class="text-balance text-muted-foreground">
-				Enter your email below to login to your account
-			</p>
-		</div>
+<Card.Root class="mx-auto max-w-sm">
+	<Card.Header>
+		<Card.Title class="text-2xl">Login</Card.Title>
+		<Card.Description>Enter your email below to login to your account</Card.Description>
+	</Card.Header>
+	<Card.Content>
 		<div class="grid gap-4">
 			<div class="grid gap-2">
 				<Label for="email">Email</Label>
@@ -32,7 +30,7 @@
 		</div>
 		<div class="mt-4 text-center text-sm">
 			Don&apos;t have an account?
-			<a href="/auth/register" class="underline"> Sign up </a>
+			<a href="/auth/register" class="underline">Sign up</a>
 		</div>
-	</div>
-</div>
+	</Card.Content>
+</Card.Root>

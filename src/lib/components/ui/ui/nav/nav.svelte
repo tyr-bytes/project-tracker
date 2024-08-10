@@ -35,13 +35,14 @@
 						)}>register</Button
 					>
 				</a>
-				<a
-					href="/daily"
-					class={cn(
-						'transition-colors hover:text-foreground/80',
-						$page.url.pathname === '/daily' ? 'text-foreground' : 'text-foreground/60'
-					)}
-					>daily
+				<a href="/daily">
+					<Button
+						variant="ghost"
+						class={cn(
+							'transition-colors hover:text-foreground/80',
+							$page.url.pathname === '/daily' ? 'text-foreground' : 'text-foreground/60'
+						)}>daily</Button
+					>
 				</a>
 			</div>
 			<!-- {/if} -->

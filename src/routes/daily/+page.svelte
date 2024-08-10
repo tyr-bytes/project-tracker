@@ -6,6 +6,7 @@
 	import * as Popover from '$lib/components/ui/ui/popover/index.js';
 	import { Button } from '$lib/components/ui/ui/button/index.js';
 	import { cn } from '$lib/utils.js';
+	import TimerTable from '$lib/components/ui/ui/timerTable.svelte';
 
 	const frameworks = [
 		{
@@ -34,7 +35,7 @@
 	let value = $state('');
 
 	let selectedValue = $derived(
-		frameworks.find((f) => f.value === value)?.label ?? 'Select a framework...'
+		frameworks.find((f) => f.value === value)?.label ?? 'Select a timecode...'
 	);
 
 	// We want to refocus the trigger button when the user selects
@@ -46,41 +47,49 @@
 			document.getElementById(triggerId)?.focus();
 		});
 	}
+
+	const tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
 </script>
 
-<div class=" lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
-	<Popover.Root bind:open let:ids>
-		<Popover.Trigger asChild let:builder>
-			<Button
-				builders={[builder]}
-				variant="outline"
-				role="combobox"
-				aria-expanded={open}
-				class="w-[200px] justify-between"
-			>
-				{selectedValue}
-				<ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
-			</Button>
-		</Popover.Trigger>
-		<Popover.Content class="w-[200px] p-0">
-			<Command.Root>
-				<Command.Input placeholder="Search framework..." />
-				<Command.Empty>No framework found.</Command.Empty>
-				<Command.Group>
-					{#each frameworks as framework}
-						<Command.Item
-							value={framework.value}
-							onSelect={(currentValue) => {
-								value = currentValue;
-								closeAndFocusTrigger(ids.trigger);
-							}}
-						>
-							<Check class={cn('mr-2 h-4 w-4', value !== framework.value && 'text-transparent')} />
-							{framework.label}
-						</Command.Item>
-					{/each}
-				</Command.Group>
-			</Command.Root>
-		</Popover.Content>
-	</Popover.Root>
+<div class="flex flex-col items-center justify-center">
+	<div class="w-full max-w-3xl rounded-lg bg-secondary p-6 shadow-md">
+		<div class="font-semibold">Project Search</div>
+		<Popover.Root bind:open let:ids>
+			<Popover.Trigger asChild let:builder>
+				<Button
+					builders={[builder]}
+					variant="outline"
+					role="combobox"
+					aria-expanded={open}
+					class="w-[200px] justify-between"
+				>
+					{selectedValue}
+					<ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" />
+				</Button>
+			</Popover.Trigger>
+			<Popover.Content class="w-[200px] p-0">
+				<Command.Root>
+					<Command.Input placeholder="Search time codes..." />
+					<Command.Empty>No timecode found.</Command.Empty>
+					<Command.Group>
+						{#each frameworks as framework}
+							<Command.Item
+								value={framework.value}
+								onSelect={(currentValue) => {
+									value = currentValue;
+									closeAndFocusTrigger(ids.trigger);
+								}}
+							>
+								<Check
+									class={cn('mr-2 h-4 w-4', value !== framework.value && 'text-transparent')}
+								/>
+								{framework.label}
+							</Command.Item>
+						{/each}
+					</Command.Group>
+				</Command.Root>
+			</Popover.Content>
+		</Popover.Root>
+		<TimerTable></TimerTable>
+	</div>
 </div>
