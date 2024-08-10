@@ -48,7 +48,9 @@
 		});
 	}
 
-	const tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
+	let { data } = $props();
+
+	console.log(data);
 </script>
 
 <div class="flex flex-col items-center justify-center">
@@ -90,6 +92,6 @@
 				</Command.Root>
 			</Popover.Content>
 		</Popover.Root>
-		<TimerTable></TimerTable>
+		<TimerTable stuff={data.projects}></TimerTable>
 	</div>
 </div>
