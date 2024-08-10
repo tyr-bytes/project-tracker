@@ -16,10 +16,6 @@
 		</a>
 
 		<nav class="buttons flex items-center gap-2">
-			<!-- {#if $currentUser} -->
-			<!-- <ThemeToggle /> -->
-			<!-- <DropdownMenu /> -->
-			<!-- {:else} -->
 			<div class="flex items-center gap-2">
 				<a href="/">
 					<Button
@@ -38,6 +34,14 @@
 							$page.url.pathname === '/auth/register' ? 'text-foreground' : 'text-foreground/60'
 						)}>register</Button
 					>
+				</a>
+				<a
+					href="/daily"
+					class={cn(
+						'transition-colors hover:text-foreground/80',
+						$page.url.pathname === '/daily' ? 'text-foreground' : 'text-foreground/60'
+					)}
+					>daily
 				</a>
 			</div>
 			<!-- {/if} -->
