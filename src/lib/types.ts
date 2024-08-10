@@ -5,8 +5,6 @@ export type Todo = {
 	userId: string;
 };
 
-// export type Projects = typeof projects;
-
 export type Project = {
 	id: string;
 	project_code: string;
@@ -18,3 +16,4 @@ export type Project = {
 		end: string;
 	}>;
 };
+export type DateStyle = Intl.DateTimeFormatOptions['dateStyle'];

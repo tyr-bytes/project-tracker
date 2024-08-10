@@ -7,6 +7,7 @@
 	import { Button } from '$lib/components/ui/ui/button/index.js';
 	import { cn } from '$lib/utils.js';
 	import TimerTable from '$lib/components/ui/ui/timerTable.svelte';
+	import { formatDate } from '$lib/site/dateutils.js';
 
 	const frameworks = [
 		{
@@ -38,6 +39,10 @@
 		frameworks.find((f) => f.value === value)?.label ?? 'Select a timecode...'
 	);
 
+	const currentDate = formatDate(new Date(Date.now()).toUTCString());
+	// TODO: Better TIme Library
+	const weekEnding = formatDate(new Date(Date.now()).toUTCString());
+
 	// We want to refocus the trigger button when the user selects
 	// an item from the list so users can continue navigating the
 	// rest of the form with the keyboard.
@@ -53,7 +58,15 @@
 	console.log(data);
 </script>
 
-<div class="flex flex-col items-center justify-center">
+<div class="mb-2 flex flex-col items-center justify-center">
+	<div class="text-4x1 font-bold">
+		{currentDate}
+	</div>
+	<div class="text-sm">Week Ending: {weekEnding}</div>
+	<Button variant="ghost">Import from yesterday?</Button>
+</div>
+
+<div class="mx-auto flex flex-col items-center justify-center">
 	<div class="w-full max-w-3xl rounded-lg bg-secondary p-6 shadow-md">
 		<div class="font-semibold">Project Search</div>
 		<Popover.Root bind:open let:ids>
