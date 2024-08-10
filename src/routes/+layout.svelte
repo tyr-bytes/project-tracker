@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Nav from '$lib/components/ui/ui/nav/nav.svelte';
 	import '../app.css';
 	import { ModeWatcher } from 'mode-watcher';
 
@@ -7,6 +8,7 @@
 
 <ModeWatcher />
 
-<div class="relative flex min-h-screen flex-col bg-background">
+<Nav />
+<div class="relative flex min-h-screen flex-col">
 	{@render children?.()}
 </div>

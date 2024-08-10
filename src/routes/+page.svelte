@@ -1,14 +1,38 @@
 <script lang="ts">
+	import { Button } from '$lib/components/ui/ui/button/index.js';
+	import { Input } from '$lib/components/ui/ui/input/index.js';
+	import { Label } from '$lib/components/ui/ui/label/index.js';
 	import { siteConfig } from '$lib/site/config';
 	let { data } = $props();
 </script>
 
-<svelte:head>
-	<title>{siteConfig.title}</title>
-	<meta content={siteConfig.description} name="description" />
-</svelte:head>
-<div class="grid grid-cols-1 gap-6 p-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-	{#each data.stuff as thing}
-		<div>{thing.title}</div>
-	{/each}
+<!-- <div class="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]"> -->
+<div class="flex items-center justify-center py-12">
+	<div class="mx-auto grid w-[350px] gap-6">
+		<div class="grid gap-2 text-center">
+			<h1 class="text-3xl font-bold">Login</h1>
+			<p class="text-balance text-muted-foreground">
+				Enter your email below to login to your account
+			</p>
+		</div>
+		<div class="grid gap-4">
+			<div class="grid gap-2">
+				<Label for="email">Email</Label>
+				<Input id="email" type="email" placeholder="m@example.com" required />
+			</div>
+			<div class="grid gap-2">
+				<div class="flex items-center">
+					<Label for="password">Password</Label>
+					<a href="##" class="ml-auto inline-block text-sm underline"> Forgot your password? </a>
+				</div>
+				<Input id="password" type="password" required />
+			</div>
+			<Button type="submit" class="w-full">Login</Button>
+			<Button variant="outline" class="w-full">Login with Google</Button>
+		</div>
+		<div class="mt-4 text-center text-sm">
+			Don&apos;t have an account?
+			<a href="/auth/register" class="underline"> Sign up </a>
+		</div>
+	</div>
 </div>
