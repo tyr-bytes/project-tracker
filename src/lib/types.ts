@@ -1,3 +1,5 @@
+import type { icons } from 'lucide-svelte';
+
 export type Todo = {
 	id: number;
 	todo: string;
@@ -16,4 +18,14 @@ export type Project = {
 		end: string;
 	}>;
 };
+
+export type NavItem = {
+	title: string;
+	href?: string;
+	disabled?: boolean;
+	external?: boolean;
+	icon?: keyof typeof icons;
+	label?: string;
+};
+
 export type DateStyle = Intl.DateTimeFormatOptions['dateStyle'];
