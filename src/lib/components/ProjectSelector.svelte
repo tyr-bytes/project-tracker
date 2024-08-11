@@ -5,12 +5,10 @@
 	import { fly } from 'svelte/transition';
 	import { writable } from 'svelte/store';
 	import type { Project } from '$lib/types';
-	import { cn } from '$lib/utils';
-	let className: $$Props['class'] = undefined;
-	export { className as class };
 
 	export let projects: Project[];
 	export let onSelectionChange: (selected: Project[]) => void;
+
 	const customSelected = writable<ComboboxOption<Project>[]>([]);
 	const {
 		elements: { menu, input, option, label },
@@ -21,6 +19,7 @@
 		multiple: true,
 		selected: customSelected
 	});
+
 	$: filteredProjects = $touchedInput
 		? projects.filter(({ name, project_code }) => {
 				const normalizedInput = $inputValue.toLowerCase();
@@ -30,75 +29,62 @@
 				);
 			})
 		: projects;
+
 	$: {
 		onSelectionChange($customSelected.map((sel) => sel.value));
 	}
 </script>
 
-<div class={cn('flex items-center justify-center', className)}>
-	<div class={cn('borber-b flex w-72 flex-col px-2', className)}>
+<div class="card flex items-center justify-center">
+	<div class="borber-b flex w-72 flex-col px-2">
 		<!-- svelte-ignore a11y_label_has_associated_control -->
 		<label use:melt={$label}>
-			<span class={cn('text-sm font-medium', className)}>Select your project</span>
+			<span class="text-sm font-medium">Select your project</span>
 		</label>
-		<div class={cn('relative', className)}>
+		<div class="relative">
 			<input
 				use:melt={$input}
-				class={cn(
-					'flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
-					className
-				)}
+				class="flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
 				placeholder="Search + select projects"
 			/>
-			<div class={cn('absolute right-2 top-1/2 z-10 -translate-y-1/2', className)}>
+			<div class="absolute right-2 top-1/2 z-10 -translate-y-1/2">
 				{#if $open}
-					<ChevronUp class={cn('size-4', className)} />
+					<ChevronUp class="size-4" />
 				{:else}
-					<ChevronDown class={cn('size-4', className)} />
+					<ChevronDown class="size-4" />
 				{/if}
 			</div>
 		</div>
 	</div>
 	{#if $open}
 		<ul
-			class={cn('overflow-y-auto overflow-x-hidden rounded-md bg-popover', className)}
+			class="overflow-y-auto overflow-x-hidden rounded-md bg-popover"
 			use:melt={$menu}
 			transition:fly={{ duration: 150, y: -5 }}
 		>
 			<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-			<div
-				class={cn('flex max-h-full flex-col gap-0 overflow-y-auto px-2 py-2', className)}
-				tabindex="0"
-			>
+			<div class="flex max-h-full flex-col gap-0 overflow-y-auto px-2 py-2" tabindex="0">
 				{#each filteredProjects as project, index (index)}
 					<li
 						use:melt={$option({
 							value: project,
 							label: project.name
 						})}
-						class={cn(
-							'relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
-							className
-						)}
+						class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
 					>
 						{#if $isSelected(project)}
-							<div class={cn('', className)}>
-								<Check class={cn('size-3', className)} />
+							<div>
+								<Check class="size-3" />
 							</div>
 						{/if}
-						<div class={cn('pl-4', className)}>
-							<span class={cn('font-medium text-muted-foreground', className)}
-								>{project.project_code}</span
-							>
-							<span class={cn('block text-sm text-foreground', className)}>{project.name}</span>
+						<div class="pl-4">
+							<span class="font-medium text-muted-foreground">{project.project_code}</span>
+							<span class="block text-sm text-foreground">{project.name}</span>
 						</div>
 					</li>
 				{:else}
 					<li
-						class={cn(
-							'relative cursor-pointer rounded-md py-1 pl-8 pr-4 data-[highlighted]:bg-magnum-100 data-[highlighted]:text-magnum-700',
-							className
-						)}
+						class="relative cursor-pointer rounded-md py-1 pl-8 pr-4 data-[highlighted]:bg-magnum-100 data-[highlighted]:text-magnum-700"
 					>
 						No results found
 					</li>

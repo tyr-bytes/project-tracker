@@ -35,11 +35,7 @@
 
 <div class="mx-auto flex flex-col items-center justify-center">
 	<div class="w-full max-w-3xl rounded-lg bg-secondary p-6 shadow-md">
-		<ProjectSelector
-			class="bg-secondary"
-			projects={data.projects}
-			onSelectionChange={handleSelectionChange}
-		/>
+		<ProjectSelector projects={data.projects} onSelectionChange={handleSelectionChange} />
 
 		<TimerTable stuff={selectedProjects}></TimerTable>
 	</div>
