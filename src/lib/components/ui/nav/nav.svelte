@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { Button } from '$lib/components/ui/ui/button';
+	import { Button } from '$lib/components/ui/button';
 	import { siteConfig } from '$lib/site/config';
 	import { cn } from '$lib/utils';
 	import Themetoggle from '../themetoggle.svelte';

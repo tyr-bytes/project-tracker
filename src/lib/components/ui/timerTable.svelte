@@ -1,8 +1,8 @@
 <script lang="ts">
-	import * as Card from '$lib/components/ui/ui/card/index.js';
-	import * as Table from '$lib/components/ui/ui/table/index.js';
-	import { Badge } from '$lib/components/ui/ui/badge/index.js';
-	import { Button } from '$lib/components/ui/ui/button/index.js';
+	import * as Card from '$lib/components/ui/card/index.js';
+	import * as Table from '$lib/components/ui/table/index.js';
+	import { Badge } from '$lib/components/ui/badge/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
 	import type { Project } from '$lib/types';
 	import { formatSeconds } from '$lib/site/dateutils';
 	import { CirclePlus, Pause, Play } from 'lucide-svelte';

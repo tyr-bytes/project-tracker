@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Nav from '$lib/components/ui/ui/nav/nav.svelte';
+	import Nav from '$lib/components/ui/nav/nav.svelte';
 	import { ModeWatcher } from 'mode-watcher';
 	import '../app.css';
 

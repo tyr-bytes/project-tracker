@@ -2,16 +2,13 @@
 	import Check from 'lucide-svelte/icons/check';
 	import ChevronsUpDown from 'lucide-svelte/icons/chevrons-up-down';
 	import { tick } from 'svelte';
-	import * as Command from '$lib/components/ui/ui/command/index.js';
-	import * as Popover from '$lib/components/ui/ui/popover/index.js';
-	import { Button } from '$lib/components/ui/ui/button/index.js';
+	import * as Command from '$lib/components/ui/command/index.js';
+	import * as Popover from '$lib/components/ui/popover/index.js';
+	import { Button } from '$lib/components/ui/button/index.js';
 	import { cn } from '$lib/utils.js';
-	import TimerTable from '$lib/components/ui/ui/timerTable.svelte';
+	import TimerTable from '$lib/components/ui/timerTable.svelte';
 	import { formatDate } from '$lib/site/dateutils.js';
-	import { CirclePlus } from 'lucide-svelte';
-
-	let open = $state(false);
-	let value = $state('');
+	import { CirclePlus, Play } from 'lucide-svelte';
 
 	const currentDate = formatDate(new Date(Date.now()).toUTCString());
 	// TODO: Better TIme Library
@@ -20,12 +17,6 @@
 	// We want to refocus the trigger button when the user selects
 	// an item from the list so users can continue navigating the
 	// rest of the form with the keyboard.
-	function closeAndFocusTrigger(triggerId: string) {
-		open = false;
-		tick().then(() => {
-			document.getElementById(triggerId)?.focus();
-		});
-	}
 
 	let { data } = $props();
 
@@ -38,7 +29,6 @@
 
 	$effect(() => console.log(new_options.length));
 
-	let selectedValue = new_options.find((f) => f.value === value)?.label ?? 'Select a timecode...';
 	console.log(new_options);
 </script>
 
@@ -54,7 +44,7 @@
 	<div class="w-full max-w-3xl rounded-lg bg-secondary p-6 shadow-md">
 		<span class="font-semibold">Project Search</span>
 		<div class="flex items-center justify-center">
-			<Popover.Root bind:open let:ids>
+			<!-- <Popover.Root bind:open let:ids>
 				<Popover.Trigger asChild let:builder>
 					<Button
 						builders={[builder]}
@@ -94,7 +84,7 @@
 						{/key}
 					</Command.Root>
 				</Popover.Content>
-			</Popover.Root>
+			</Popover.Root> -->
 			<Button variant="outline" class="gap-2">
 				<CirclePlus class="h-3.5 w-3.5" />
 				Add Project
