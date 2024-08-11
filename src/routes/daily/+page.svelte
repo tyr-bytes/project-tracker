@@ -10,35 +10,8 @@
 	import { formatDate } from '$lib/site/dateutils.js';
 	import { CirclePlus } from 'lucide-svelte';
 
-	const frameworks = [
-		{
-			value: 'sveltekit',
-			label: 'SvelteKit'
-		},
-		{
-			value: 'next.js',
-			label: 'Next.js'
-		},
-		{
-			value: 'nuxt.js',
-			label: 'Nuxt.js'
-		},
-		{
-			value: 'remix',
-			label: 'Remix'
-		},
-		{
-			value: 'astro',
-			label: 'Astro'
-		}
-	];
-
 	let open = $state(false);
 	let value = $state('');
-
-	let selectedValue = $derived(
-		frameworks.find((f) => f.value === value)?.label ?? 'Select a timecode...'
-	);
 
 	const currentDate = formatDate(new Date(Date.now()).toUTCString());
 	// TODO: Better TIme Library
@@ -56,7 +29,17 @@
 
 	let { data } = $props();
 
-	console.log(data);
+	const new_options = $state(
+		data.projects.map((p) => ({
+			value: p.id,
+			label: `${p.name} (${p.project_code})`
+		}))
+	);
+
+	$effect(() => console.log(new_options.length));
+
+	let selectedValue = new_options.find((f) => f.value === value)?.label ?? 'Select a timecode...';
+	console.log(new_options);
 </script>
 
 <div class="mb-2 flex flex-col items-center justify-center">
@@ -64,13 +47,13 @@
 		{currentDate}
 	</div>
 	<div class="text-sm">Week Ending: {weekEnding}</div>
-	<Button variant="ghost">Import from yesterday?</Button>
+	<Button variant="outline" size="sm">Import from yesterday?</Button>
 </div>
 
 <div class="mx-auto flex flex-col items-center justify-center">
 	<div class="w-full max-w-3xl rounded-lg bg-secondary p-6 shadow-md">
-		<div class="flex items-center">
-			<span class="font-semibold">Project Search</span>
+		<span class="font-semibold">Project Search</span>
+		<div class="flex items-center justify-center">
 			<Popover.Root bind:open let:ids>
 				<Popover.Trigger asChild let:builder>
 					<Button
@@ -88,26 +71,31 @@
 					<Command.Root>
 						<Command.Input placeholder="Search time codes..." />
 						<Command.Empty>No timecode found.</Command.Empty>
-						<Command.Group>
-							{#each frameworks as framework}
-								<Command.Item
-									value={framework.value}
-									onSelect={(currentValue) => {
-										value = currentValue;
-										closeAndFocusTrigger(ids.trigger);
-									}}
-								>
-									<Check
-										class={cn('mr-2 h-4 w-4', value !== framework.value && 'text-transparent')}
-									/>
-									{framework.label}
-								</Command.Item>
-							{/each}
-						</Command.Group>
+						{#key new_options}
+							<Command.Group>
+								{#each new_options as _, i}
+									<Command.Item
+										value={new_options[i].value}
+										onSelect={(currentValue) => {
+											value = currentValue;
+											closeAndFocusTrigger(ids.trigger);
+										}}
+									>
+										<Check
+											class={cn(
+												'mr-2 h-4 w-4',
+												value !== new_options[i].value && 'text-transparent'
+											)}
+										/>
+										{new_options[i].label}
+									</Command.Item>
+								{/each}
+							</Command.Group>
+						{/key}
 					</Command.Root>
 				</Popover.Content>
 			</Popover.Root>
-			<Button variant="outline" class="gap-1">
+			<Button variant="outline" class="gap-2">
 				<CirclePlus class="h-3.5 w-3.5" />
 				Add Project
 			</Button>

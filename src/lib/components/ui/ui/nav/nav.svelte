@@ -3,8 +3,7 @@
 	import { Button } from '$lib/components/ui/ui/button';
 	import { siteConfig } from '$lib/site/config';
 	import { cn } from '$lib/utils';
-	import Darkmode from '../themetoggle.svelte';
-
+	import Themetoggle from '../themetoggle.svelte';
 	let navHidden = false;
 </script>
 
@@ -45,7 +44,7 @@
 						)}>daily</Button
 					>
 				</a>
-				<Darkmode />
+				<Themetoggle />
 			</div>
 			<!-- {/if} -->
 		</nav>

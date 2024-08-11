@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Nav from '$lib/components/ui/ui/nav/nav.svelte';
-	import '../app.css';
 	import { ModeWatcher } from 'mode-watcher';
+	import '../app.css';
 
 	let { children } = $props();
 </script>
@@ -13,12 +13,3 @@
 		{@render children?.()}
 	</main>
 </div>
-
-<style>
-	html,
-	body {
-		height: 100%;
-		margin: 0;
-		padding: 0;
-	}
-</style>
