@@ -36,15 +36,15 @@
 </script>
 
 <div class="card flex">
-	<div class="borber-b flex w-72 flex-col px-2">
+	<div class="flex w-72 flex-col gap-2">
 		<!-- svelte-ignore a11y_label_has_associated_control -->
 		<label use:melt={$label}>
-			<span class="text-sm font-medium">Select your project</span>
+			<!-- <span class="px-1 text-sm font-medium">Select your project</span> -->
 		</label>
 		<div class="relative">
 			<input
 				use:melt={$input}
-				class="flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+				class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
 				placeholder="Search + select projects"
 			/>
 			<div class="absolute right-2 top-1/2 z-10 -translate-y-1/2">
@@ -58,19 +58,19 @@
 	</div>
 	{#if $open}
 		<ul
-			class="overflow-y-auto overflow-x-hidden rounded-md bg-popover"
+			class="overflow-y-auto overflow-x-hidden rounded-md border-4 bg-popover"
 			use:melt={$menu}
 			transition:fly={{ duration: 150, y: -5 }}
 		>
 			<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-			<div class="flex max-h-full flex-col gap-0 overflow-y-auto px-2 py-2" tabindex="0">
+			<div class="flex max-h-full flex-col overflow-y-auto px-2 py-2" tabindex="0">
 				{#each filteredProjects ?? [] as project, index (index)}
 					<li
 						use:melt={$option({
 							value: project,
 							label: project.name,
 						})}
-						class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+						class="relative flex cursor-default select-none items-center px-2 py-1.5 text-sm outline-none hover:bg-secondary aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
 					>
 						{#if $isSelected(project)}
 							<div>
