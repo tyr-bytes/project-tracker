@@ -6,6 +6,8 @@
 	import type { Project } from '$lib/types';
 	import { formatSeconds } from '$lib/site/dateutils';
 	import { Trash2, Play, XCircle } from 'lucide-svelte';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	import Ellipsis from 'lucide-svelte/icons/ellipsis';
 	type Props = {
 		stuff: Project[];
 	};
@@ -38,7 +40,10 @@
 					<Table.Head>Project</Table.Head>
 					<Table.Head class="hidden sm:table-cell">Description</Table.Head>
 					<Table.Head class="hidden sm:table-cell">Time Elapsed</Table.Head>
-					<Table.Head class="">Actions</Table.Head>
+					<Table.Head class="">Start/Stop</Table.Head>
+					<Table.Head>
+						<span class="sr-only">Actions</span>
+					</Table.Head>
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>
@@ -56,17 +61,31 @@
 						<Table.Cell class="text-s hidden sm:table-cell"
 							>{formatSeconds(row.timeSpent)}</Table.Cell
 						>
-						<Table.Cell class="accent-foreground">
+						<Table.Cell>
 							<div class="flex items-center space-x-2">
 								<Button
-									variant="outline"
+									variant="ghost"
 									size="icon"
 									onclick={() => annoyMike(i)}
 									class={selectedRow == i ? 'bg-primary text-primary-foreground' : ''}
 									><Play /></Button
 								>
-								<Button variant="destructive" size="icon"><Trash2 /></Button>
 							</div>
+						</Table.Cell>
+						<Table.Cell>
+							<DropdownMenu.Root>
+								<DropdownMenu.Trigger asChild let:builder>
+									<Button aria-haspopup="true" size="icon" variant="ghost" builders={[builder]}>
+										<Ellipsis class="h-4 w-4" />
+										<span class="sr-only">Toggle menu</span>
+									</Button>
+								</DropdownMenu.Trigger>
+								<DropdownMenu.Content align="end">
+									<DropdownMenu.Label>Actions</DropdownMenu.Label>
+									<DropdownMenu.Item>Edit</DropdownMenu.Item>
+									<DropdownMenu.Item>Delete</DropdownMenu.Item>
+								</DropdownMenu.Content>
+							</DropdownMenu.Root>
 						</Table.Cell>
 					</Table.Row>
 				{/each}
