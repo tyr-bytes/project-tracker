@@ -5,24 +5,23 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import type { Project } from '$lib/types';
 	import { formatSeconds } from '$lib/site/dateutils';
-	import { Trash2, Play, XCircle } from 'lucide-svelte';
+	import { Trash2, Play, Pause, XCircle } from 'lucide-svelte';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import Ellipsis from 'lucide-svelte/icons/ellipsis';
+
 	type Props = {
 		stuff: Project[];
 	};
+
 	let { stuff }: Props = $props();
 
-	let isClicked = $state(false);
-	let selectedRow = $state();
+	let activeProject = $state<number | null>(null);
 
-	async function annoyMike(x: number) {
-		console.log(x);
-		isClicked = !isClicked;
-		if (isClicked) {
-			selectedRow = x;
+	function toggleProject(index: number) {
+		if (activeProject === index) {
+			activeProject = null;
 		} else {
-			selectedRow = null;
+			activeProject = index;
 		}
 	}
 </script>
@@ -58,18 +57,25 @@
 						<Table.Cell class="hidden sm:table-cell">
 							<Badge class="text-xs" variant="secondary">{row.description}</Badge>
 						</Table.Cell>
-						<Table.Cell class="text-s hidden sm:table-cell"
-							>{formatSeconds(row.timeSpent)}</Table.Cell
-						>
+						<Table.Cell class="text-s hidden sm:table-cell">
+							{formatSeconds(row.timeSpent)}
+						</Table.Cell>
 						<Table.Cell>
 							<div class="flex items-center space-x-2">
 								<Button
 									variant="ghost"
 									size="icon"
-									onclick={() => annoyMike(i)}
-									class={selectedRow == i ? 'bg-primary text-primary-foreground' : ''}
-									><Play /></Button
+									on:click={() => toggleProject(i)}
+									class={activeProject === i
+										? 'animate-pulse bg-primary text-primary-foreground hover:bg-secondary hover:text-secondary-foreground'
+										: 'hover:bg-secondary hover:text-secondary-foreground'}
 								>
+									{#if activeProject === i}
+										<Pause class="h-4 w-4" />
+									{:else}
+										<Play class="h-4 w-4" />
+									{/if}
+								</Button>
 							</div>
 						</Table.Cell>
 						<Table.Cell>
