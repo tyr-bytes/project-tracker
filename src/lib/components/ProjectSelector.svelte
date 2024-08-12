@@ -64,7 +64,7 @@
 		>
 			<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 			<div class="flex max-h-full flex-col gap-0 overflow-y-auto px-2 py-2" tabindex="0">
-				{#each filteredProjects as project, index (index)}
+				{#each filteredProjects ?? [] as project, index (index)}
 					<li
 						use:melt={$option({
 							value: project,
