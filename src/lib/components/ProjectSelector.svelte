@@ -13,11 +13,11 @@
 	const {
 		elements: { menu, input, option, label },
 		states: { open, inputValue, touchedInput },
-		helpers: { isSelected }
+		helpers: { isSelected },
 	} = createCombobox({
 		forceVisible: true,
 		multiple: true,
-		selected: customSelected
+		selected: customSelected,
 	});
 
 	$: filteredProjects = $touchedInput
@@ -68,7 +68,7 @@
 					<li
 						use:melt={$option({
 							value: project,
-							label: project.name
+							label: project.name,
 						})}
 						class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
 					>

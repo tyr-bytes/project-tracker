@@ -14,8 +14,8 @@ export const projects: Project[] = [
 		intervals: [
 			{ start: '2023-08-01T09:00:00', end: '2023-08-01T12:30:00' },
 			{ start: '2023-08-02T14:00:00', end: '2023-08-02T17:00:00' },
-			{ start: '2023-08-03T10:00:00', end: '2023-08-03T14:00:00' }
-		]
+			{ start: '2023-08-03T10:00:00', end: '2023-08-03T14:00:00' },
+		],
 	},
 	{
 		id: generateId(),
@@ -26,8 +26,8 @@ export const projects: Project[] = [
 		intervals: [
 			{ start: '2023-08-01T13:00:00', end: '2023-08-01T18:00:00' },
 			{ start: '2023-08-02T09:00:00', end: '2023-08-02T17:45:00' },
-			{ start: '2023-08-04T10:30:00', end: '2023-08-04T16:30:00' }
-		]
+			{ start: '2023-08-04T10:30:00', end: '2023-08-04T16:30:00' },
+		],
 	},
 	{
 		id: generateId(),
@@ -37,8 +37,8 @@ export const projects: Project[] = [
 		timeSpent: 29700,
 		intervals: [
 			{ start: '2023-08-03T09:00:00', end: '2023-08-03T13:15:00' },
-			{ start: '2023-08-05T14:00:00', end: '2023-08-05T18:00:00' }
-		]
+			{ start: '2023-08-05T14:00:00', end: '2023-08-05T18:00:00' },
+		],
 	},
 	{
 		id: generateId(),
@@ -48,8 +48,8 @@ export const projects: Project[] = [
 		timeSpent: 19800,
 		intervals: [
 			{ start: '2023-08-02T09:30:00', end: '2023-08-02T12:00:00' },
-			{ start: '2023-08-04T15:00:00', end: '2023-08-04T18:00:00' }
-		]
+			{ start: '2023-08-04T15:00:00', end: '2023-08-04T18:00:00' },
+		],
 	},
 	{
 		id: generateId(),
@@ -59,7 +59,7 @@ export const projects: Project[] = [
 		timeSpent: 39600,
 		intervals: [
 			{ start: '2023-08-01T10:00:00', end: '2023-08-01T16:00:00' },
-			{ start: '2023-08-03T13:00:00', end: '2023-08-03T18:00:00' }
-		]
-	}
+			{ start: '2023-08-03T13:00:00', end: '2023-08-03T18:00:00' },
+		],
+	},
 ];

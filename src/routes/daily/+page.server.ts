@@ -6,6 +6,6 @@ export const load: PageServerLoad = async () => {
 	const projects = await pb.collection('projects').getFullList<Project>();
 
 	return {
-		projects: projects as Project[]
+		projects: projects as Project[],
 	};
 };
