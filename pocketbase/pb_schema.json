@@ -28,7 +28,13 @@
 				"presentable": false,
 				"unique": false,
 				"options": {
-					"mimeTypes": ["image/jpeg", "image/png", "image/svg+xml", "image/gif", "image/webp"],
+					"mimeTypes": [
+						"image/jpeg",
+						"image/png",
+						"image/svg+xml",
+						"image/gif",
+						"image/webp"
+					],
 					"thumbs": null,
 					"maxSelect": 1,
 					"maxSize": 5242880,
@@ -65,7 +71,7 @@
 				"id": "9b3na0zc",
 				"name": "project_code",
 				"type": "text",
-				"required": false,
+				"required": true,
 				"presentable": false,
 				"unique": false,
 				"options": {
@@ -103,7 +109,9 @@
 				}
 			}
 		],
-		"indexes": [],
+		"indexes": [
+			"CREATE UNIQUE INDEX `idx_ghvXKeO` ON `projects` (`project_code`)"
+		],
 		"listRule": "",
 		"viewRule": null,
 		"createRule": null,
@@ -247,7 +255,11 @@
 				"unique": false,
 				"options": {
 					"maxSelect": 1,
-					"values": ["draft", "submitted", "approved"]
+					"values": [
+						"draft",
+						"submitted",
+						"approved"
+					]
 				}
 			}
 		],
