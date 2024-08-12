@@ -6,7 +6,6 @@
 	import type { Project } from '$lib/types';
 	import { formatSeconds } from '$lib/site/dateutils';
 	import { Trash2, Play, XCircle } from 'lucide-svelte';
-	import { tick } from 'svelte';
 	type Props = {
 		stuff: Project[];
 	};

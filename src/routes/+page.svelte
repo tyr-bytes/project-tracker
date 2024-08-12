@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/ui/button/button.svelte';
-
+	import { linksConfig } from '$lib/site/config';
+	import { cn } from '$lib/utils';
 	let companyName = 'TechCorp';
 	let tagline = 'Innovating for Tomorrow';
 	let ctaText = 'Get Started';
@@ -15,17 +16,9 @@
 		<section class="container mx-auto py-20 text-center">
 			<h2 class="mb-4 text-4xl font-bold">{tagline}</h2>
 			<p class="mb-8 text-xl">Welcome to my dumb app</p>
-			<Button onclick={handleCTA} class="rounded px-4 py-2 font-bold">
-				{ctaText}
-			</Button>
+			<a href="/daily">
+				<Button class={cn('transition-colors hover:text-background/80')}>Start Tracking</Button>
+			</a>
 		</section>
 	</div>
 </main>
-
-<style>
-	:global(body) {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
-</style>

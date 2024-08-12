@@ -35,7 +35,7 @@
 	}
 </script>
 
-<div class="card flex items-center justify-center">
+<div class="card flex">
 	<div class="borber-b flex w-72 flex-col px-2">
 		<!-- svelte-ignore a11y_label_has_associated_control -->
 		<label use:melt={$label}>
