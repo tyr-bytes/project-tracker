@@ -9,7 +9,8 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"type-gen": "pnpx pocketbase-typegen --db ~/pocketbase/pb_data/data.db --out pocketbase-types.ts"
 	},
 	"devDependencies": {
 		"@melt-ui/pp": "^0.3.2",
@@ -41,6 +42,7 @@
 		"cmdk-sv": "^0.0.18",
 		"lucide-svelte": "^0.427.0",
 		"mode-watcher": "^0.4.1",
+		"pocketbase-typegen": "^1.2.1",
 		"tailwind-merge": "^2.4.0",
 		"tailwind-variants": "^0.2.1"
 	}
